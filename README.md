@@ -9,14 +9,16 @@ Dynamic Array: Finding an item by index get(index) is super fast O(1). But addin
 Linked List: Finding an item get(index) is slow O(n) because you have to count from the start every time. But adding at the beginning add(0, x) is fast O(1) because you just change one pointer.   
 
 Min-Heap: Adding things insert and taking the smallest thing out extractMin both take O(log n) time. The smallest number is always right at the top, which is O(1) to just look at.   
-4. Correctness
+
+3. Correctness
 I had to prove two of my loops actually work.   
 
 Array Contains: The loop checks each spot one by one. Before it starts, we know the item isn't in the empty spots we haven't checked. Every time it moves to the next spot, if it doesn't find the item, it knows the item wasn't in any of the spots behind it either. When it finishes looking at everything and doesn't find it, we know for sure it's not in the array.
 
 Heap Sift-Up: When I insert a number at the bottom, the tree is fine except maybe that one number is smaller than its parent. The loop checks if it's smaller, and if it is, they swap. It keeps doing this until the number is bigger than its parent or it reaches the top. Since it fixes the only broken part on the way up, the whole heap is correct at the end.
 
-5. Experimental Setup
+4. Experimental Setup
+
 I tested my code using these rules:   
 Sizes of n: I tested with 100, 1,000, 10,000, and 100,000 items.   
 Repetitions: I ran every single test 5 times and found the average so a random computer lag wouldn't mess it up.   
@@ -31,10 +33,10 @@ Workload 2 (Array vs List Search)
 Workload 3 (Array vs List Insert/Remove at 0)
 Workload 4 (Min-Heap insert and extract)
 
-7. Discussion
+6. Discussion
 When I made n really big (like 100,000), the O(n) stuff got really slow. For example, the linked list took way longer to find things than the array. This proves that the Big-O math actually works in real life. One weird thing was that even though searching is technically O(n) for both the array and the list, the array usually finished faster. I learned this is because arrays are stored in a straight line in the computer's memory, so the computer can read it faster than a list which is scattered everywhere.   
 
-8. Design Recommendations
+7. Design Recommendations
 Use a Dynamic Array for almost everything, especially if you need to look up items by their index number a lot.   
 
 Only use a Linked List if you have a specific program that only ever adds and deletes things from the very front of the line.   
