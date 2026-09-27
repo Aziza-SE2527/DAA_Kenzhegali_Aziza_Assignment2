@@ -4,12 +4,7 @@ public class LinkedList
     {
         int data;
         Node next;
-
-        Node(int data)
-        {
-            this.data = data;
-            this.next = null;
-        }
+        Node(int data) { this.data = data; }
     }
 
     private Node head;
@@ -17,40 +12,90 @@ public class LinkedList
 
     public LinkedList()
     {
-        this.head = null;
-        this.size = 0;
+        head=null;
+        size=0;
     }
+
 
     public void add(int x)
     {
-        Node newNode = new Node(x);
-
-        if(head==null)
+        if (head==null)
         {
-            head = newNode;
+            head=new Node(x);
         }
         else
         {
-            Node current = head;
-            while(current.next != null)
+            Node current=head;
+            while (current.next != null)
             {
-                current = current.next;
+                current=current.next;
             }
+            current.next =new Node(x);
+        }
+        size++;
+    }
+
+    public void add(int index, int x)
+    {
+        if (index<0 || index>size)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        Node newNode =new Node(x);
+        if (index == 0)
+        {
+            newNode.next= head;
+            head=newNode;
+        }
+        else
+        {
+            Node current= head;
+            for (int i =0;i<index - 1;i++)
+            {
+                current =current.next;
+            }
+            newNode.next =current.next;
             current.next = newNode;
         }
         size++;
     }
 
+    public int remove(int index)
+    {
+        if (index<0 || index >= size)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        int removed;
+        if (index == 0)
+        {
+            removed = head.data;
+            head = head.next;
+        }
+        else
+        {
+            Node current = head;
+            for (int i =0;i<index - 1;i++)
+            {
+                current =current.next;
+            }
+            removed= current.next.data;
+            current.next = current.next.next;
+        }
+        size--;
+        return removed;
+    }
+
     public int get(int index)
     {
-        if(index<0 || index>=size)
+        if (index<0 || index >= size)
         {
-            throw new IndexOutOfBoundsException("Index out of bounds");
+            throw new IndexOutOfBoundsException();
         }
         Node current = head;
-        for(int i=0;i<index;i++)
+        for (int i =0;i<index; i++)
         {
-            current = current.next;
+            current= current.next;
         }
         return current.data;
     }
@@ -58,63 +103,11 @@ public class LinkedList
     public boolean contains(int x)
     {
         Node current = head;
-        while(current.next != null)
+        while (current != null)
         {
-            if(current.next.data == x)
-            {
-                return true;
-            }
-            current = current.next;
+            if (current.data==x) return true;
+            current=current.next;
         }
         return false;
-    }
-
-    public void remove(int index)
-    {
-        if(index<0 || index>=size)
-            {
-            throw new IndexOutOfBoundsException("Index out of bounds");
-            }
-        if(index==0)
-        {
-            head = head.next;
-        }
-        else
-        {
-            Node current = head;
-            for(int i=0;i<index-1;i++)
-            {
-                current = current.next;
-            }
-            current.next = current.next.next;
-        }
-        size--;
-    }
-
-    public void add(int index,int x)
-    {
-        if(index<0 || index>size)
-        {
-            throw new IndexOutOfBoundsException("Index out of bounds");
-        }
-        Node newNode = new Node(x);
-
-        if(index==0)
-        {
-            newNode.next = head;
-            head = newNode;
-        }
-        else
-        {
-            Node current = head;
-            for(int i=0;i<index-1;i++)
-            {
-                current = current.next;
-            }
-
-            newNode.next = current.next;
-            current.next = newNode;
-        }
-        size++;
     }
 }
