@@ -15,8 +15,17 @@ public class DynamicArray
             }
         data[size] = x;
         size++;
-
     }
+
+    public int get(int index)
+    {
+        if(index<0 || index>=size)
+        {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " is out of bounds");
+        }
+        return data[index];
+    }
+
 
     public void resize() {
         int[] newData = new int[data.length * 2];
